@@ -28,8 +28,10 @@ const ProductVariant = () => {
               </Link>
             </div>
             <div className="product-item">
+              <Link to="/office">
               <img src={office} alt="office" />
               <p>Office Supplies</p>
+              </Link>
             </div>
             <div className="product-item">
               <Link to="/computer">

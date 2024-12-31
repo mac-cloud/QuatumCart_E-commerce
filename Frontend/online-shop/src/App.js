@@ -12,6 +12,12 @@ import WearableDetails from './Items/WearableDetails';
 import CablesDetails from './Items/CablesDetails';
 import Cable from './Items/Cable';
 import BulbsDetails from './Items/BulbsDetails';
+import OfficeDetails from './Items/OfficeDetails';
+import ServiceOffered from './Items/ServicesOffered';
+import WholesaleDetails from './Items/WholesaleDetails';
+import SigninPage from './SecurityFeatures/SigninPage';
+import SignupPage from './SecurityFeatures/SignupPage';
+import ContactPage from './CustomerSupport/ContactPage';
 //import ProductVariant from './ProductManagement/ProductVariant.js';
 function App() {
   return (
@@ -30,6 +36,12 @@ function App() {
         <Route path="/cables" element={< CablesDetails/>} />
         <Route path="/cable" element={<Cable/>} />
         <Route path="/bulbs" element={<BulbsDetails/>} />
+        <Route path="/office" element={<OfficeDetails/>} />
+        <Route path="/services" element={<ServiceOffered/>} />
+        <Route path="/wholesale" element={<WholesaleDetails/>} />
+        <Route path="/signin" element={<SigninPage/>} />
+        <Route path="/signup" element={<SignupPage/>} />
+        <Route path="/contact" element={<ContactPage/>} />
       </Routes>
     </BrowserRouter>
     

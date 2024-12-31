@@ -1,5 +1,5 @@
 .app-container {
-    background-color:green;
+    background-color:red;
     min-height: 470vh; 
     padding: 20px;
     margin: auto;
@@ -197,6 +197,50 @@
     margin: 10px 0;
 }
 
+/*account-dropdown*/
+.account-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.account-link {
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.account-link:hover {
+  color: #4caf50;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 150px;
+  padding: 10px 0;
+}
+
+.dropdown-item {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  text-align: left;
+  width: 100%;
+  font-size: 14px;
+  color: black;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color:antiquewhite;
+}
 
 /*product*/
 .product {
@@ -589,19 +633,19 @@
 
   .phone-shop {
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color:lightgoldenrodyellow;
   }
   
   .category-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: flex-start; /* Align the categories to the left */
+    justify-content: flex-start; 
   }
   
   .category {
-    width: 100%; /* 100% width of the container */
-    margin-bottom: 20px; /* Optional: Adds space between categories */
+    width: 100%; 
+    margin-bottom: 20px; 
   }
   
   .category h2 {
@@ -612,15 +656,15 @@
   
   .phone-list {
     display: flex;
-    flex-wrap: nowrap; /* Prevent items from wrapping */
-    overflow-x: auto; /* Horizontal scrolling if content overflows */
-    gap: 20px; /* Space between phone items */
-    width: 100%; /* Ensure it takes the full width of the category */
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 20px; 
+    width: 100%; 
   }
   
   .phone-item {
-    flex-shrink: 0; /* Prevent shrinking */
-    min-width: 200px; /* Minimum width for each phone item */
+    flex-shrink: 0; 
+    min-width: 200px; 
     background-color: #fff;
     padding: 10px;
     border-radius: 8px;
@@ -629,8 +673,8 @@
   }
   
   .phone-image {
-    width: 100%; /* Image takes full width of phone item */
-    height: auto; /* Maintain aspect ratio */
+    width: 100%; 
+    height: auto; 
     border-radius: 8px;
   }
   
@@ -662,3 +706,328 @@
   }
   
   
+
+ /*Services offered*/
+
+
+.services-container {
+  padding: 130px;
+ 
+}
+
+.services-title {
+  text-align: center;
+  color: #4CAF50;
+}
+
+.services-list {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px;
+  justify-content: center;
+}
+
+.service-category {
+  flex: 1 1 calc(33.333% - 20px); 
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  max-width: 300px; 
+  text-align: center;
+}
+
+.service-category img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.service-category-title {
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #4CAF50;
+}
+
+.service-item {
+  margin: 5px 0;
+  text-align: left; 
+}
+
+.service-category ul {
+  padding: 0;
+  list-style: none;
+}
+
+
+
+/*sign-in page*/
+
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+/* Sign In Box */
+.signin-box {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Title */
+.signin-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  background-color: orange;
+  border-radius: 20px;
+}
+
+/* Form Inputs */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.signin-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+.signin-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+.signin-input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Button */
+.signin-button {
+  width: 40%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signin-button:hover {
+  background-color: #45a049;
+}
+
+
+.signin-link {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.signin-link:hover {
+  text-decoration: underline;
+}
+
+
+/*signup page*/
+
+/* Container styling */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 140vh;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+/* Sign Up Box */
+.signup-box {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Title */
+.signup-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  background-color: orange;
+  border-radius: 20px;
+}
+
+/* Form Inputs */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.signup-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+.signup-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+.signup-input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Button */
+.signup-button {
+  width: 40%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  background-color: #45a049;
+}
+
+/* Footer */
+.signup-footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.signup-link {
+  color: #4caf50;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+
+/*contact page*/
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 200px;
+  height: 130vh;
+  background-color: #f9f9f9;
+  margin: 0;
+}
+
+/* Contact Box */
+.contact-box {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+/* Title */
+.contact-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  background-color: orange;
+  border-radius: 20px;
+}
+
+/* Form Inputs */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.contact-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+.contact-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.contact-input:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+textarea.contact-input {
+  height: 150px;
+  resize: vertical;
+}
+
+/* Button */
+.contact-button {
+  width: 40%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact-button:hover {
+  background-color: #45a049;
+}

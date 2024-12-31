@@ -67,13 +67,17 @@ const Categories = () => {
   </div> 
 
   <div className="services-rectangle">
+    <Link to="/services">
   <p>view Services</p>
     <img src={ service1} alt="services" />
+    </Link>
   </div>
  
   <div className="services-rectangle">
+    <Link to="/wholesale">
   <p>view Wholesale</p>
   <img src={ wholesale} alt="services" />
+  </Link>
   </div>
   
   </div>

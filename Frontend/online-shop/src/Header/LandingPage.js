@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Static/Styles.css';
-
+import './Accountdropdown';
+import Accountdropdown from './Accountdropdown';
 const Navbar = () => {
 
      return(
@@ -29,7 +30,7 @@ const Navbar = () => {
             <button>Search</button>
             </div>
             <div className="navbar-actions">
-                <a href="#account"><i className="fa fa-user"></i>Account</a>
+                <Accountdropdown/>
                 <a href="#cart"><i className="fa fa fa-shopping-cart"></i>Cart</a>
             </div>
             
