@@ -19,7 +19,10 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = 'Cart.CustomUser'
-
+AUTHENTICATION_BACKENDS = [
+    'Cart.auth_backends.EmailAuthBackend',  
+    'django.contrib.auth.backends.ModelBackend',    
+]
 # Application definition
 
 INSTALLED_APPS = [
