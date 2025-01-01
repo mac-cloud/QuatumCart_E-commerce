@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "../Static/Styles.css";
+import axios from "axios";
 import LandingPage from '../Header/LandingPage';
 import FooterPage from '../Header/FooterPage';
+
+
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+    
   });
 
   const handleChange = (e) => {
@@ -17,11 +21,25 @@ const ContactPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., send to an API or email)
-    alert("Thank you for contacting us!");
-    setFormData({ name: "", email: "", message: "" });
+    // Handle form submission logic 
+
+     try {
+      const response = await axios.post("http://127.0.0.1:8000/contact/", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      alert(response.data.message);
+      setFormData({name: "", email: "", message: ""});
+     } catch (error) {
+      console.error("Therre was an error sending tha contact form :", error)
+      alert("Something went wrong please try again later.")
+     }
+
+ 
   };
 
   return (

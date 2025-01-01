@@ -4,6 +4,19 @@ import LandingPage from '../Header/LandingPage';
 import FooterPage from '../Header/FooterPage';
 
 const SignUpPage = () => {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData ({
+      ...
+    })
+  }
   return (
     <div>
     <div className="signup-container">
