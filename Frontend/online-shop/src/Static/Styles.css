@@ -1031,3 +1031,133 @@ textarea.contact-input {
 .contact-button:hover {
   background-color: #45a049;
 }
+
+
+/*Wholesale*/
+
+/* Global Styles */
+
+
+h1, h3 {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Phone Shop Container */
+.phone-shop {
+  padding: 155px;
+  background-color: #fff;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.phone-shop h1 {
+  font-size: 1.7rem;
+  margin-bottom: 10px;
+  color: black;
+  background-color: orange;
+  border-radius: 12px;
+  width: 500px;
+  align-items: center;
+  margin-left: 250px;
+}
+
+/* Phone List Styling */
+.phone-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+/* Individual Phone Item */
+.phone-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.phone-item:hover {
+  transform: scale(1.05);
+}
+
+.phone-image {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* Phone Info Section */
+.phone-info {
+  padding: 15px;
+  text-align: left;
+}
+
+.phone-info h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+.phone-info p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Stock Status Styling */
+.phone-info p.stock-status {
+  font-weight: bold;
+}
+
+.phone-info p.stock-status.in-stock {
+  color: green;
+}
+
+.phone-info p.stock-status.out-of-stock {
+  color: red;
+}
+
+/* Buy Button Styling */
+.buy-btn {
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.buy-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .phone-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-shop {
+    padding: 10px;
+  }
+
+  .phone-item {
+    padding: 10px;
+  }
+
+  .phone-info h3 {
+    font-size: 1.25rem;
+  }
+
+  .buy-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}

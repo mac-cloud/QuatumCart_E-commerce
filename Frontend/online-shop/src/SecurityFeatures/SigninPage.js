@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { useUser } from "../SecurityFeatures/UserContext"; // Import the useUser hook
 import "../Static/Styles.css";
 import LandingPage from "../Header/LandingPage";
 import FooterPage from "../Header/FooterPage";
@@ -10,7 +11,8 @@ const SignInPage = () => {
     email: "",
     password: "",
   });
-
+  
+  const { setUser } = useUser();  // Get the setUser function from the context
   const navigate = useNavigate(); // Use React Router to navigate after login
 
   const handleChange = (e) => {
@@ -32,8 +34,10 @@ const SignInPage = () => {
 
       if (response.data.status === "success") {
         alert(response.data.message);
+        // Set the user data in context
+        setUser({ name: response.data.name, email: response.data.email }); // Assuming the response contains user's name
         setFormData({ email: "", password: "" });
-        navigate("/"); // Navigate to a protected dashboard after login
+        navigate("/"); // Navigate to home page after login
       } else {
         alert(response.data.message);
       }

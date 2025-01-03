@@ -22,12 +22,13 @@ const ProductNav = () => {
                 </Link>
             </div>
             <div className="nav-item">
-               
+               <Link to="/appliances">
                 <h2>  <FaHome size={18} color={'green'} />Home Appliances</h2>
+                </Link>
             </div>
            
             <div className="nav-item">
-               <Link to="audio">
+               <Link to="/audio">
                 <h2>  <FaHeadphones size={18} color={'green'} />Audio Equipment</h2>
                 </Link>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Static/Styles.css'; 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './SecurityFeatures/UserContext';
 import Categories from './ProductManagement/Categories';
 import PhonesDetails from './Items/PhonesDetails';
 import TVDetails from './Items/TVDetails';
@@ -18,13 +19,13 @@ import WholesaleDetails from './Items/WholesaleDetails';
 import SigninPage from './SecurityFeatures/SigninPage';
 import SignupPage from './SecurityFeatures/SignupPage';
 import ContactPage from './CustomerSupport/ContactPage';
+import HomeAppliances from './Items/HomeAppliances';
 //import ProductVariant from './ProductManagement/ProductVariant.js';
 function App() {
   return (
-
+  <UserProvider>
     <BrowserRouter>
       <Routes>
-        
         <Route path="/" element={<Categories />} />
         <Route path="/phones" element={<PhonesDetails />} />
         <Route path="/televions" element={<TVDetails />} />
@@ -42,9 +43,10 @@ function App() {
         <Route path="/signin" element={<SigninPage/>} />
         <Route path="/signup" element={<SignupPage/>} />
         <Route path="/contact" element={<ContactPage/>} />
+        <Route path="/appliances" element={< HomeAppliances/>} />
       </Routes>
     </BrowserRouter>
-    
+    </UserProvider>
   );
 }
 

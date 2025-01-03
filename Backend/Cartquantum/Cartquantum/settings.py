@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,11 +19,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+
+
 AUTH_USER_MODEL = 'Cart.CustomUser'
-AUTHENTICATION_BACKENDS = [
-    'Cart.auth_backends.EmailAuthBackend',  
-    'django.contrib.auth.backends.ModelBackend',    
-]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,6 +50,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Cartquantum.urls'
+
+
+
 
 TEMPLATES = [
     {
@@ -119,5 +122,9 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

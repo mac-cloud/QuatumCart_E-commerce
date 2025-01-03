@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Static/Styles.css';
 import './Accountdropdown';
+import Context from './Context';
 import Accountdropdown from './Accountdropdown';
 const Navbar = () => {
 
@@ -11,6 +12,7 @@ const Navbar = () => {
         <div className="navbar-top">
             <div className="left-side">
                 <p>HELLO it's December, shop with us</p>
+                < Context />
             </div>
             <div className="right-side">
                 <p className="animated-text">Free Delivery to your doorstep</p>

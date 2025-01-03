@@ -29,9 +29,9 @@ class CustomUserManager(BaseUserManager):
 # Custom User Model
 class CustomUser(AbstractUser):
     """Custom User Model for storing user details."""
+    username = None  # Remove the default username field
     email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
+    name = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -39,11 +39,10 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['name']
 
     def __str__(self):
         return self.email
-
 
 # Category Model
 class Category(models.Model):
@@ -63,35 +62,39 @@ class Product(models.Model):
     description = models.TextField()
     release_date = models.DateField()
     stock = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='products/')
+    is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='media/products/')
 
     def __str__(self):
         return f"{self.category.name} - {self.brand} {self.name} - ${self.price}"
 
     def is_in_stock(self):
-        return self.stock > 0
+        return self.stock > 0 and self.is_active  # Combine stock and active status
 
     def stock_status(self):
+        if not self.is_active:
+            return "Out of Stock "
         return "In Stock" if self.is_in_stock() else "Out of Stock"
 
 
 # Wholesale Product Model
 class WholesaleProduct(models.Model):
     name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="wholesaleproducts")
     brand = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     stock = models.PositiveIntegerField()
-    image = models.ImageField(upload_to="wholesale/")
+    image = models.ImageField(upload_to="media/wholesale/")
 
     def __str__(self):
-        return f"{self.category.name} - {self.brand} {self.name} - ${self.price}"
+        return f"{self.brand} {self.name} - ${self.price}"
 
     def is_in_stock(self):
-        return self.stock > 0
+        return self.stock > 0 and self.is_active
 
     def stock_status(self):
+        if not self.is_active:
+            return "Out of Stock "
         return "In Stock" if self.is_in_stock() else "Out of Stock"
 
 
@@ -99,7 +102,7 @@ class WholesaleProduct(models.Model):
 class Services(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    service_image = models.ImageField(upload_to='services/')
+    service_image = models.ImageField(upload_to='media/services/')
 
     def __str__(self):
         return self.name

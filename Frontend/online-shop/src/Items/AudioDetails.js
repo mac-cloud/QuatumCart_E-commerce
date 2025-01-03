@@ -1,81 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../Static/Styles.css';
 import LandingPage from '../Header/LandingPage';
 import FooterPage from '../Header/FooterPage';
-import  headphone2 from '../Images/headphone2.jpeg';
-import  headphone4 from '../Images/headphone4.webp';
-import  headphone5 from '../Images/headphone5.webp';
-import  headphone6 from '../Images/headphone6.webp';
-
-const phoneData = {
-  infinix: [
-    { id: 1, name: 'Infinix Zero 8', price: '$250', image:  headphone2  },
-    { id: 2, name: 'Infinix Note 10', price: '$220', image: headphone2  },
-    { id: 3, name: 'Infinix Zero 8', price: '$250', image:  headphone2  },
-    { id: 4, name: 'Infinix Note 10', price: '$220', image: headphone2  },
-    { id: 5, name: 'Infinix Zero 8', price: '$250', image:  headphone2  },
-    { id: 6, name: 'Infinix Note 10', price: '$220', image: headphone2  },
-  ],
-  samsung: [
-    { id: 1, name: 'Samsung Galaxy S23', price: '$999', image: headphone4  },
-    { id: 2, name: 'Samsung Galaxy A54', price: '$450', image: headphone4  },
-    { id: 3, name: 'Samsung Galaxy S23', price: '$999', image: headphone4  },
-    { id: 4, name: 'Samsung Galaxy A54', price: '$450', image: headphone4  },
-    { id: 5, name: 'Samsung Galaxy S23', price: '$999', image: headphone4  },
-    { id: 6, name: 'Samsung Galaxy A54', price: '$450', image: headphone4  },
-  ],
-  iphone: [
-    { id: 1, name: 'iPhone 15 Pro', price: '$1099', image: headphone6 },
-    { id: 2, name: 'iPhone 14', price: '$799', image: headphone6 },
-    { id: 3, name: 'iPhone 15 Pro', price: '$1099', image: headphone6 },
-    { id: 4, name: 'iPhone 14', price: '$799', image: headphone6 },
-    { id: 5, name: 'iPhone 15 Pro', price: '$1099', image: headphone6 },
-    { id: 6, name: 'iPhone 14', price: '$799', image: headphone6 },
-  ],
-  nokia: [
-    { id: 1, name: 'Nokia G50', price: '$250', image: headphone5 },
-    { id: 2, name: 'Nokia 5.4', price: '$180', image: headphone5 },
-    { id: 3, name: 'Nokia G50', price: '$250', image: headphone5 },
-    { id: 4, name: 'Nokia 5.4', price: '$180', image: headphone5 },
-    { id: 5, name: 'Nokia G50', price: '$250', image: headphone5 },
-    { id: 6, name: 'Nokia 5.4', price: '$180', image: headphone5 },
-  ],
-  techno: [
-    { id: 1, name: 'Samsung TV 55 inches', price: '38,000 ksh', image: headphone4 },
-    { id: 2, name: 'Samsung TV 55 inches', price: '24,000 ksh', image: headphone4  },
-    { id: 3, name: 'Samsung TV 55 inches', price: '38,000 ksh', image: headphone4 },
-    { id: 4, name: 'Samsung TV 55 inches', price: '24,000 ksh', image: headphone4  },
-    { id: 5, name: 'Samsung TV 55 inches', price: '38,000 ksh', image: headphone4 },
-    { id: 6, name: 'Samsung TV 55 inches', price: '24,000 ksh', image: headphone4  },
-  ],
-  
-};
 
 const PhoneShop = () => {
+  const [productData, setProductData] = useState(null); // State to store products data
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+
+  useEffect(() => {
+    // Fetch product data from backend
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/phones/'); // Your backend API URL
+        console.log(response.data); // Log the response to verify structure
+        setProductData(response.data.categories); // Store data in state
+      } catch (error) {
+        setError('Failed to fetch products');
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductData(); // Trigger API call
+  }, []); // Empty dependency array to fetch data only once
+
+  if (loading) {
+    return <div>Loading...</div>; // Show loading indicator
+  }
+
+  if (error) {
+    return <div>{error}</div>; // Show error if fetching data fails
+  }
+
+  // Ensure data exists and filter by "Televisions"
+  const audiosCategory = productData.find(
+    (category) =>
+      category.category_name.toLowerCase() === 'audios'.toLowerCase()
+  );
+
+  if (!audiosCategory || audiosCategory.products.length === 0) {
+    return <div>No audios available</div>; // Handle case where no televisions are found
+  }
+
   return (
     <div>
       <LandingPage />
       <div className="phone-shop">
-        <h1>Our Phone Collection</h1>
-
+        <h1>Our Audio Collection</h1>
         <div className="category-container">
-          {Object.keys(phoneData).map((category) => (
-            <div key={category} className="category">
-              <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-              <div className="phone-list">
-                {phoneData[category].map((phone) => (
-                  <div key={phone.id} className="phone-item">
-                    <img src={phone.image} alt={phone.name} className="phone-image" />
-                    <div className="phone-info">
-                      <h3>{phone.name}</h3>
-                      <p>{phone.price}</p>
-                      <button className="buy-btn">Buy Now</button>
-                    </div>
+          {/* Display Televisions category */}
+          <div key={audiosCategory.category_name} className="category">
+            <h2>{audiosCategory.category_name}</h2>
+            <p>{audiosCategory.category_description}</p>
+            <div className="phone-list">
+              {/* Iterate over products in the 'Televisions' category */}
+              {audiosCategory.products.map((product) => (
+                <div key={product.id} className="phone-item">
+                  <img
+                    src={`http://127.0.0.1:8000${product.image}`}
+                    alt={product.name}
+                    className="phone-image"
+                  />
+                  <div className="phone-info">
+                    <h3>{product.name}</h3>
+                    <p>Brand: {product.brand}</p>
+                    <h3>Price: {product.price}</h3>
+                    <p>{product.description}</p>
+                    <p>{product.stock_status}</p>
+                    <button className="buy-btn">Buy Now</button>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
       <FooterPage />

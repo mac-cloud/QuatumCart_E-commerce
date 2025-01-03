@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import "../Static/Styles.css";
-
+//import LogoutPage from "../SecurityFeatures/LogoutPage";
 const AccountDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,6 +10,8 @@ const AccountDropdown = () => {
   };
 
   return (
+    <div>
+      
     <div className="account-dropdown">
       <button className="account-link" onClick={toggleDropdown}>
         <i className="fa fa-user"></i> Account
@@ -29,6 +31,7 @@ const AccountDropdown = () => {
           </button>
         </div>
       )}
+    </div>
     </div>
   );
 };
