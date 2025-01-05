@@ -1,8 +1,17 @@
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# mpesa credentials
+MPESA_ENVIRONMENT = 'sandbox'
+MPESA_CONSUMER_KEY = 'FFxEGz4UQXoQAEiS69LBYpnjJVAyquNgnKrePN1oDvdL6WGK'
+MPESA_CONSUMER_SECRET = 'tUtmFV5g8GnwopmoO4I5gibrmIIJL7ZZP7WrubnSgQhTBydRNbkdXKJPHO8OYhAz'
+MPESA_EXPRESS_SHORTCODE = "174379"
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+CALLBACK_URL = ' https://f886-91-102-180-13.ngrok-free.app/mpesa/callback/'
 
 
 SECRET_KEY = 'django-insecure-0-f3&873^bvv)-a3q_n_gtuapq36qd++e_a8u2j1l=e0m_9e%%'
@@ -10,14 +19,13 @@ SECRET_KEY = 'django-insecure-0-f3&873^bvv)-a3q_n_gtuapq36qd++e_a8u2j1l=e0m_9e%%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-]
-
-CORS_ALLOWED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '::1', 'f886-91-102-180-13.ngrok-free.app']
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 
@@ -32,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_daraja',
     'Cartquantum',
     'Cart',
     'rest_framework',

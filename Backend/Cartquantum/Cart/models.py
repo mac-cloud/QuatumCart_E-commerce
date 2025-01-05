@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
@@ -55,6 +56,12 @@ class Category(models.Model):
 
 # Product Model
 class Product(models.Model):
+    item_id = models.CharField(
+        max_length=36,  
+        editable=False, 
+        blank=True
+    )
+    
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
     brand = models.CharField(max_length=50)
@@ -75,7 +82,13 @@ class Product(models.Model):
         if not self.is_active:
             return "Out of Stock "
         return "In Stock" if self.is_in_stock() else "Out of Stock"
+    def save(self, *args, **kwargs):
+        if not self.item_id:
+            self.item_id = str(uuid.uuid4())
+        super().save(*args, **kwargs)
 
+    def __str__(self):
+        return f"{self.name}  ({self.item_id})"        
 
 # Wholesale Product Model
 class WholesaleProduct(models.Model):
@@ -117,3 +130,23 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"Contact Form Submission from {self.name}"
+
+
+# payment mpesa
+class MpesaPayment(models.Model):
+    phone_number = models.CharField(max_length=15)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_id = models.CharField(max_length=50, null=True, blank=True)
+    status = models.CharField(max_length=20, default="Pending")
+    created_at = models.DateTimeField(auto_now_add=True)
+    response_code = models.CharField(max_length=10, null=True, blank=True)
+    response_description = models.TextField(null=True, blank=True)
+    merchant_request_id = models.CharField(max_length=100, null=True, blank=True)
+    checkout_request_id = models.CharField(max_length=100, null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return f"{self.phone_number} - {self.amount} KSH - {self.status}"
+    
+    

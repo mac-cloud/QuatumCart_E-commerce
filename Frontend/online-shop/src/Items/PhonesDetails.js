@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../Static/Styles.css';
 import LandingPage from '../Header/LandingPage';
 import FooterPage from '../Header/FooterPage';
@@ -78,7 +79,9 @@ const PhoneShop = () => {
                     >
                       {product.stock_status}
                     </p>
+                    <Link to="/mpesapayment/:item_id">
                     <button className="buy-btn">Buy Now</button>
+                    </Link>
                   </div>
                 </div>
               ))}

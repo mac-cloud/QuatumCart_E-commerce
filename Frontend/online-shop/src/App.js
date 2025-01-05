@@ -20,6 +20,7 @@ import SigninPage from './SecurityFeatures/SigninPage';
 import SignupPage from './SecurityFeatures/SignupPage';
 import ContactPage from './CustomerSupport/ContactPage';
 import HomeAppliances from './Items/HomeAppliances';
+import PaymentIntergration from './PaymentGateway/PaymentIntegration';
 //import ProductVariant from './ProductManagement/ProductVariant.js';
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/signup" element={<SignupPage/>} />
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/appliances" element={< HomeAppliances/>} />
+        <Route path="/mpesapayment/:item_id" element={< PaymentIntergration/>} />
       </Routes>
     </BrowserRouter>
     </UserProvider>

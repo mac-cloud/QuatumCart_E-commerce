@@ -1,11 +1,24 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from datetime import datetime
+from django.http import HttpResponse
+from django.shortcuts import render
+from django_daraja.mpesa.core import MpesaClient
+from django.conf import settings
 import json
+import requests
+import logging
+import base64
+import sys
 from django.http import JsonResponse
-from .models import Contact, CustomUser, Product, Category, Services, WholesaleProduct
+from .models import Contact, CustomUser, Product, Category, Services, WholesaleProduct, MpesaPayment
+
+print(sys.path)
 # contact logic
 @csrf_exempt
 def contact_form(request):
@@ -165,7 +178,7 @@ def phones_view(request):
 
         for product in products:
             product_data = {
-                'id': product.id,
+                'item_id': product.item_id,
                 'name': product.name,
                 'category': product.category.name,
                 'brand': product.brand,
@@ -217,3 +230,70 @@ def wholesale_view(request):
             for wholesaleproduct in wholesales
         ]
         return JsonResponse(data, safe=False)
+    
+   # Fetch access token from Safaricom API
+
+logger = logging.getLogger(__name__)
+
+
+
+@csrf_exempt
+def initiate_stk_push(request, item_id):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            phone_number = data.get('phone_number')
+            amount = data.get('amount')
+
+            # Fetch product by item_id
+            try:
+                product = Product.objects.get(item_id=item_id)
+            except Product.DoesNotExist:
+                return JsonResponse({'error': 'Item not found'}, status=404)
+
+            # Input validation
+            if not phone_number or not amount:
+                return JsonResponse({'error': 'Phone number and amount are required'}, status=400)
+
+            try:
+                amount = int(amount)
+            except ValueError:
+                return JsonResponse({'error': 'Amount must be an integer'}, status=400)
+
+            # Format phone number to 254 format
+            if phone_number.startswith('07'):
+                phone_number = '254' + phone_number[1:]
+
+            cl = MpesaClient()
+            account_reference = item_id
+            transaction_desc = f'Payment for {product.name}'
+            callback_url = 'https://api.darajambili.com/express-payment'
+
+            # Initiate STK Push
+            response = cl.stk_push(
+                phone_number,
+                amount,
+                account_reference,
+                transaction_desc,
+                callback_url
+            )
+
+            logger.info(f"STK Push Response: {response}")
+
+            # Save transaction regardless of success or failure
+            transaction = MpesaPayment.objects.create(
+               phone_number=phone_number,
+               amount=amount,
+               response_code=response.response_code,  # Updated line
+               response_description=response.response_description,  # Updated line
+               merchant_request_id=response.merchant_request_id,  # Updated line
+               checkout_request_id=response.checkout_request_id  # Updated line
+)
+    
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON format'}, status=400)
+        except Exception as e:
+            logger.error(f"STK Push Error: {str(e)}")
+            return JsonResponse({'error': 'Internal server error'}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
