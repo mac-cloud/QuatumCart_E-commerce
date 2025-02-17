@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { useUser } from "../SecurityFeatures/UserContext"; // Import the useUser hook
+import { useUser } from "../SecurityFeatures/UserContext"; 
 import "../Static/Styles.css";
 import LandingPage from "../Header/LandingPage";
 import FooterPage from "../Header/FooterPage";
@@ -12,8 +12,8 @@ const SignInPage = () => {
     password: "",
   });
   
-  const { setUser } = useUser();  // Get the setUser function from the context
-  const navigate = useNavigate(); // Use React Router to navigate after login
+  const { setUser } = useUser();  
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,9 +35,18 @@ const SignInPage = () => {
       if (response.data.status === "success") {
         alert(response.data.message);
         // Set the user data in context
-        setUser({ name: response.data.name, email: response.data.email }); // Assuming the response contains user's name
+        setUser({ name: response.data.name, email: response.data.email }); 
         setFormData({ email: "", password: "" });
-        navigate("/"); // Navigate to home page after login
+
+        //check for pending action in session storage
+        const pendingRedirect = sessionStorage.getItem("pendingRedirect");
+        if (pendingRedirect) {
+          sessionStorage.removeItem("pendingRedirect");
+          navigate(pendingRedirect);
+        } else {
+          navigate("/");
+        }
+        
       } else {
         alert(response.data.message);
       }

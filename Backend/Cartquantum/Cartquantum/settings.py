@@ -11,11 +11,12 @@ MPESA_CONSUMER_KEY = 'FFxEGz4UQXoQAEiS69LBYpnjJVAyquNgnKrePN1oDvdL6WGK'
 MPESA_CONSUMER_SECRET = 'tUtmFV5g8GnwopmoO4I5gibrmIIJL7ZZP7WrubnSgQhTBydRNbkdXKJPHO8OYhAz'
 MPESA_EXPRESS_SHORTCODE = "174379"
 MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
-CALLBACK_URL = ' https://f886-91-102-180-13.ngrok-free.app/mpesa/callback/'
+CALLBACK_URL = 'https://9078-129-222-187-108.ngrok-free.app/mpesa_callback/'
 
 
 SECRET_KEY = 'django-insecure-0-f3&873^bvv)-a3q_n_gtuapq36qd++e_a8u2j1l=e0m_9e%%'
-
+# tracking system
+SHIPPO_API_KEY = 'shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -23,7 +24,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '::1', 'f886-91-102-180-13.ngrok-free.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '::1', '.ngrok-free.app']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'Cart',
     'rest_framework',
     'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
@@ -52,11 +54,12 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    
+]    
 
 ROOT_URLCONF = 'Cartquantum.urls'
 
@@ -127,8 +130,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '../Frontend/online-shop/build/static'),
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

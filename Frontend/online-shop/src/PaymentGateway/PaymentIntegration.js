@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 //import Cookies from 'js-cookie';
@@ -12,11 +12,23 @@ const PaymentPage = () => {
     const [paymentMessage, setPaymentMessage] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('M-Pesa');
     const [showModal, setShowModal] = useState(false);
-   
+    
 
     const { item_id } = useParams();
     
-   
+    useEffect(() => {
+        const fetchItemDetails = async () =>{
+             try {
+                const response = await axios.get(`http://127.0.0.1:8000/item/${item_id}`);
+                const itemAmount = response.data.price;
+                setAmount(itemAmount);
+             } catch (error) {
+                  console.error('Error fetching item details:', error.response || error);
+                  alert('Unable to fetch item details . Please try again ')
+             }
+        };
+       fetchItemDetails();
+    }, [item_id]);
 
     // Handle payment initiation
     const handlePayment = async () => {
@@ -43,17 +55,20 @@ const PaymentPage = () => {
                 { phone_number: phoneNumber, amount },
                 {
                     headers: {
-                        'Content-Type': 'application/json'  // Ensure correct content type
+                        'Content-Type': 'application/json'  
                     }
                 }
             );
 
             const message = response.data.ResponseDescription || 'Payment initiated. Check your phone.';
+           
             setPaymentMessage(message);
             setShowModal(true);
         } catch (error) {
-            console.error('Payment error:', error);
-            setPaymentMessage('Failed to initiate payment. Please try again.');
+            console.error('Payment error:', error.response);
+            const errorMessage = 
+                error.response?.data?.message 
+            setPaymentMessage(errorMessage);
             setShowModal(true);
         }
     };
@@ -91,9 +106,9 @@ const PaymentPage = () => {
                         />
                         <input
                             type="number"
-                            placeholder="Enter amount"
+                            placeholder="Amount"
                             value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
+                            readOnly
                         />
                         <button onClick={handlePayment}>
                             Pay with M-Pesa
@@ -104,6 +119,9 @@ const PaymentPage = () => {
                     <div className="modal-backdrop">
                         <div className="modal-content">
                             <p>{paymentMessage}</p>
+                            <p>Payment Initiated.....
+                                Check your phone
+                            </p>
                             <button onClick={closeModal}>OK</button>
                         </div>
                     </div>

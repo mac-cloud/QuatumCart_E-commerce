@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
@@ -149,4 +150,26 @@ class MpesaPayment(models.Model):
     def __str__(self):
         return f"{self.phone_number} - {self.amount} KSH - {self.status}"
     
-    
+
+# order    
+class Order(models.Model):
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    delivery_option = models.CharField(
+        max_length=20,
+        choices=[('delivery', 'Delivery'), ('pickup', 'Pickup')],
+        default='pickup'
+    )
+    delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    final_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    order_date = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if self.delivery_option == 'delivery':
+            self.final_price = self.total_price + self.delivery_fee
+        else:
+            self.final_price = self.total_price
+        super().save(*args, **kwargs)        
+

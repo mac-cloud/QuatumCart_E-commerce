@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faWhatsapp, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import '../Static/Styles.css'; 
-import logo from '../Images/logo.png';
+import logo from '../Images/logo1.png';
 const Footer = () => {
   return (
     <footer className="footer">

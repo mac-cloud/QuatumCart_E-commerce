@@ -11,21 +11,26 @@ const SignUpPage = () => {
     name: "",
     email: "",
     password: "",
+    agreeToTearms: false,
   });
 
    const navigate = useNavigate ();
 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData ({
       ...formData,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.agreeToTearms) 
+    {
+      alert("You must agree to the terms and conditions to proceed.")
+    }
     try {
       const response = await axios.post("http://127.0.0.1:8000/signup/", formData, {
           headers: {
@@ -103,6 +108,22 @@ const SignUpPage = () => {
               required
             />
           </div>
+          <div>
+            <input
+            type="checkbox"
+            id="agreeToTerms"
+            name="agreeToTerms"
+            checked={formData.agreeToTearms}
+            onChange={handleChange}
+            />
+            <label htmlFor="agreeToTerms">
+              I agree to the{" "}
+              <a href="/terms" target="_blank" rel="noopener noreferrer">
+               Terms and Conditions
+              </a>
+            </label>
+          </div>
+      
           <button type="submit" className="signup-button">Sign Up</button>
           <p className="signup-footer">
             Already have an account? <a href="/signin" className="signup-link">Sign In</a>

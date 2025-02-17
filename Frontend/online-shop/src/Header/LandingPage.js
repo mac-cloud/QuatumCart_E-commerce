@@ -1,10 +1,15 @@
 import React from 'react';
 import '../Static/Styles.css';
 import './Accountdropdown';
+import { useCart} from "../GlobalContext/CartContext";
+import logo from "../Images/logo1.png";
 import Context from './Context';
 import Accountdropdown from './Accountdropdown';
 const Navbar = () => {
 
+
+    const { cartItems } = useCart();
+    const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
      return(
 
         <div className="home">
@@ -22,7 +27,9 @@ const Navbar = () => {
        
          <div className="navbar-center">
             <div className='logo'>
-                <a href="#home">Logo</a>
+                <a href="#home">
+                <img src={logo} alt="Logo" className="logo-image" />
+                </a>
             </div>
             <div className="search-bar">
                 <input type="text" placeholder="Seach..." />
@@ -33,7 +40,15 @@ const Navbar = () => {
             </div>
             <div className="navbar-actions">
                 <Accountdropdown/>
-                <a href="#cart"><i className="fa fa fa-shopping-cart"></i>Cart</a>
+                <button>
+                <a href="#cart">
+               <i className="fa fa-shopping-cart"></i> Cart 
+               <span className="cart-count" style={{ color: "orange", fontWeight: "bold" }}>
+                 {cartCount}
+               </span>
+             </a>
+             </button>
+            
             </div>
             
          </div>
