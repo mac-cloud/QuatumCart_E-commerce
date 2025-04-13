@@ -49,11 +49,11 @@ Quantum Cart is a full-stack e-commerce web application built using **React** fo
    git clone https://github.com/yourusername/quantum-cart.git
    cd quantum-cart/backend
 
-1. Clone the repo:
+1. Create a virtual environment and activate it:
    ```bash
-   git clone https://github.com/yourusername/quantum-cart.git
-   cd quantum-cart/backend
-   
+   python -m venv env
+   source env/bin/activate # on Windows: env\Scripts\activate
+
 2. Create a virtual environment and activate it:
   ```bash
   python -m venv env
