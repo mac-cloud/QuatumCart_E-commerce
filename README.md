@@ -50,20 +50,20 @@ Quantum Cart is a full-stack e-commerce web application built using **React** fo
    cd quantum-cart/backend
 
 
-Create a virtual environment and activate it:
+2. Create a virtual environment and activate it:
 
   ```bash
     python -m venv env
     source env/bin/activate # on Windows: env\Scripts\activate
 
-Install dependencies:
+3. Install dependencies:
 
     ```bash
-     pip install -r requirements.txt
+       pip install -r requirements.txt
 
-Run Server 
+4. Run Server 
    ``` python manage.py migrate
-    python manage.py runserver
+       python manage.py runserver
 
 
 
