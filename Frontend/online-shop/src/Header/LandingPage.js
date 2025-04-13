@@ -16,7 +16,7 @@ const Navbar = () => {
         <nav className='navbar'>  
         <div className="navbar-top">
             <div className="left-side">
-                <p>HELLO it's December, shop with us</p>
+                <p>HELLO it's April, shop with us</p>
                 < Context />
             </div>
             <div className="right-side">

@@ -17,8 +17,8 @@ from django.conf import settings
 import json
 import uuid
 import jwt
-import shippo
-from shippo.models import components
+#import shippo
+#from shippo.models import components
 import requests
 import logging
 import base64
@@ -363,7 +363,7 @@ def initiate_stk_push(request, item_id):
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-shippo_sdk = shippo.Shippo(api_key_header="shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb")
+#shippo_sdk = shippo.Shippo(api_key_header="shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb")
 
 
 @csrf_exempt
@@ -389,19 +389,19 @@ def mpesa_callback(request):
            #     send_receipt_email(customer_email, receipt)
           
 
-            shippo_sdk.addresses.create(
-             components.AddressCreateRequest(
-                 name="Shawn Ippotle",
-                 company="Shippo",
-                 street1="215 Clayton St.",
-                 city="San Francisco",
-                 state="CA",
-                 zip="94117",
-                 country="US", # iso2 country code
-                 phone="+1 555 341 9393",
-                 email="shippotle@shippo.com"
-               )         
-         )
+            #shippo_sdk.addresses.create(
+            # components.AddressCreateRequest(
+            #     name="Shawn Ippotle",
+            #     company="Shippo",
+            #     street1="215 Clayton St.",
+            #     city="San Francisco",
+            #     state="CA",
+            #     zip="94117",
+            #     country="US", # iso2 country code
+            #     phone="+1 555 341 9393",
+            #     email="shippotle@shippo.com"
+            #   )         
+         #)
 
             print(shippo_sdk)
             # Respond with parcel ID for verification
@@ -499,38 +499,38 @@ def send_receipt_email(customer_email, receipt):
 #print(transaction['label_url'])
 #shippo.config(api_key="shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb")
 
-shippo_sdk = shippo.Shippo(api_key_header="shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb")
+#shippo_sdk = shippo.Shippo(api_key_header="shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb")
 
-shippo_sdk.addresses.create(
-    components.AddressCreateRequest(
-        name="Shawn Ippotle",
-        company="Shippo",
-        street1="215 Clayton St.",
-        city="San Francisco",
-        state="CA",
-        zip="94117",
-        country="US", # iso2 country code
-        phone="+1 555 341 9393",
-        email="shippotle@shippo.com"
-    )
-)
-
-print(shippo_sdk)
-def track_parcel(request, carrier, tracking_number):
-    """
-    Parcel information is fetched from Shippo.
-    """
-    try:
-        # Fetch tracking information
-        tracking = shippo.Track.get(carrier=carrier, tracking_number=tracking_number)
-
-        # Return data to frontend
-        return JsonResponse(tracking, safe=False)
-    except shippo.error.APIError as e:
-        return JsonResponse({'error': str(e)}, status=400)
-
-    except Exception as e:
-        return JsonResponse({'error': 'Something went wrong: ' + str(e)}, status=500)
+#shippo_sdk.addresses.create(
+#    components.AddressCreateRequest(
+#        name="Shawn Ippotle",
+#        company="Shippo",
+#        street1="215 Clayton St.",
+#        city="San Francisco",
+#        state="CA",
+#        zip="94117",
+#        country="US", # iso2 country code
+#        phone="+1 555 341 9393",
+#        email="shippotle@shippo.com"
+#    )
+#)
+#
+#print(shippo_sdk)
+#def track_parcel(request, carrier, tracking_number):
+#    """
+#    Parcel information is fetched from Shippo.
+#    """
+#    try:
+#        # Fetch tracking information
+#        tracking = shippo.Track.get(carrier=carrier, tracking_number=tracking_number)
+#
+#        # Return data to frontend
+#        return JsonResponse(tracking, safe=False)
+#    except shippo.error.APIError as e:
+#        return JsonResponse({'error': str(e)}, status=400)
+#
+#    except Exception as e:
+#        return JsonResponse({'error': 'Something went wrong: ' + str(e)}, status=500)
 
 # calculating price
 

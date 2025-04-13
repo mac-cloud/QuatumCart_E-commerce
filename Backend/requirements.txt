@@ -1,2 +1,20 @@
  pyngrok
- django-rest
+ django-cors-headers
+ djangorestframework
+ jwt
+ asgiref             
+certifi             
+cffi                
+charset-normalizer 
+cryptography        
+Django             
+django-cors-headers
+django-daraja      
+djangorestframework 
+idna              
+pip                 
+pycparser         
+python-decouple  
+requests            
+sqlparse           
+urllib3            

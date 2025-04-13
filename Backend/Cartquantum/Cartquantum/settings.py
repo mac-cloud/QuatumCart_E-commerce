@@ -16,7 +16,7 @@ CALLBACK_URL = 'https://9078-129-222-187-108.ngrok-free.app/mpesa_callback/'
 
 SECRET_KEY = 'django-insecure-0-f3&873^bvv)-a3q_n_gtuapq36qd++e_a8u2j1l=e0m_9e%%'
 # tracking system
-SHIPPO_API_KEY = 'shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb'
+#SHIPPO_API_KEY = 'shippo_test_de839afc8d10ae41c1b2e8102fb332db2c4b2ebb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
